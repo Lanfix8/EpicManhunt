@@ -1,0 +1,12 @@
+name: ManhuntPlus
+version: '${project.version}'
+main: fr.lanfix.manhuntplus.ManhuntPlus
+api-version: 1.16
+prefix: [ Manhunt Plus ]
+commands:
+  manhunt:
+    permission: manhuntplus.admin
+    aliases:
+      - manhuntplus
+    description: Admin command to run Manhunt Plus
+    usage: /manhunt
