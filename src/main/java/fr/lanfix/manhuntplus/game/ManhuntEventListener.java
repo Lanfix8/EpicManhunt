@@ -4,6 +4,6 @@ import org.bukkit.event.Listener;
 
 public class ManhuntEventListener implements Listener {
 
-
+    // TODO Manhunt Features
 
 }

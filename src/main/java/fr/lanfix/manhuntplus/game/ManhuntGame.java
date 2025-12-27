@@ -54,4 +54,12 @@ public class ManhuntGame {
     public void setGlowingSpeedrunner(boolean glowingSpeedrunner) {
         this.glowingSpeedrunner = glowingSpeedrunner;
     }
+
+    public List<Player> getSpeedrunners() {
+        return speedrunners;
+    }
+
+    public List<Player> getHunters() {
+        return hunters;
+    }
 }

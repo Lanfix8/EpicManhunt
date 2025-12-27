@@ -12,7 +12,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Objects;
+import java.util.List;
 
 public enum Menu implements MenuInterface {
 
@@ -87,10 +87,11 @@ public enum Menu implements MenuInterface {
                     itemStack.setItemMeta(itemMeta);
                 }
             };
-            // TODO Speedrunners Button
-            // menuItems[15]
-            // TODO Hunters Button
-            // menuItems[16]
+            // Players Button
+            menuItems[16] = MenuItem.openMenu(Material.PLAYER_HEAD, ChatColor.BLUE + "Configure players", List.of(
+                    ChatColor.RESET + "Choose the " + ChatColor.DARK_PURPLE + "speedrunners" + ChatColor.RESET +
+                            " and the " + ChatColor.RED + "hunters"
+            ), Menu.PLAYERS_MENU);
             // Start or Stop Button
             if (!ManhuntGame.instance.isRunning()) {
                 menuItems[22] = new MenuItem() {
@@ -126,6 +127,136 @@ public enum Menu implements MenuInterface {
             }
             // Leave Menu
             // menuItems[26] = MenuItem.leaveMenu();
+            Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.GREEN + "Manhunt Plus");
+            inventory.setStorageContents(MenuItem.getItems(menuItems));
+            return inventory;
+        }
+
+        @Override
+        public MenuItem[] getItems() {
+            return menuItems;
+        }
+
+        @Override
+        public boolean canCloseNormally() {
+            return true;
+        }
+    },
+
+    PLAYERS_MENU {
+        final MenuItem[] menuItems = MenuItem.fillBackground(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 54);
+
+        @Override
+        public Inventory getInventory(InventoryHolder holder) {
+            // Speedrunners
+            int i = 0;
+            for (Player speedrunner : ManhuntGame.instance.getSpeedrunners()) {
+                ItemStack itemStack = ItemStackUtils.playerHead(ChatColor.DARK_PURPLE + speedrunner.getName(),
+                        speedrunner.getPlayerProfile(), List.of(
+                                ChatColor.RESET + "Left Click to remove this player from the speedrunners",
+                                ChatColor.RESET + "Right Click to move this player to the hunters"));
+                menuItems[i] = new MenuItem() {
+                    @Override
+                    public ItemStack getItem() {
+                        return itemStack;
+                    }
+
+                    @Override
+                    public void onClick(InventoryClickEvent event) {
+                        switch (event.getClick()) {
+                            case LEFT, SHIFT_LEFT -> {
+                                ManhuntGame.instance.getSpeedrunners().remove(speedrunner);
+                                if (event.getWhoClicked() instanceof Player player) {
+                                    MenuManager.scheduleOpenMenu(player, Menu.PLAYERS_MENU);
+                                }
+                            }
+                            case RIGHT, SHIFT_RIGHT -> {
+                                ManhuntGame.instance.getSpeedrunners().remove(speedrunner);
+                                ManhuntGame.instance.getHunters().add(speedrunner);
+                                if (event.getWhoClicked() instanceof Player player) {
+                                    MenuManager.scheduleOpenMenu(player, Menu.PLAYERS_MENU);
+                                }
+                            }
+                        }
+                    }
+                };
+                i++;
+            }
+            do {
+                menuItems[i] = MenuItem.fromMaterial(Material.PURPLE_STAINED_GLASS_PANE);
+                i++;
+            } while (i % 9 != 0);
+            // Hunters
+            for (Player hunter : ManhuntGame.instance.getHunters()) {
+                ItemStack itemStack = ItemStackUtils.playerHead(ChatColor.RED + hunter.getName(),
+                        hunter.getPlayerProfile(), List.of(
+                                ChatColor.RESET + "Left Click to remove this player from the hunters",
+                                ChatColor.RESET + "Right Click to move this player to the speedrunners"));
+                menuItems[i] = new MenuItem() {
+                    @Override
+                    public ItemStack getItem() {
+                        return itemStack;
+                    }
+
+                    @Override
+                    public void onClick(InventoryClickEvent event) {
+                        switch (event.getClick()) {
+                            case LEFT, SHIFT_LEFT -> {
+                                ManhuntGame.instance.getHunters().remove(hunter);
+                                if (event.getWhoClicked() instanceof Player player) {
+                                    MenuManager.scheduleOpenMenu(player, Menu.PLAYERS_MENU);
+                                }
+                            }
+                            case RIGHT, SHIFT_RIGHT -> {
+                                ManhuntGame.instance.getHunters().remove(hunter);
+                                ManhuntGame.instance.getSpeedrunners().add(hunter);
+                                if (event.getWhoClicked() instanceof Player player) {
+                                    MenuManager.scheduleOpenMenu(player, Menu.PLAYERS_MENU);
+                                }
+                            }
+                        }
+                    }
+                };
+                i++;
+            }
+            do {
+                menuItems[i] = MenuItem.fromMaterial(Material.RED_STAINED_GLASS_PANE);
+                i++;
+            } while (i % 9 != 0);
+            // Other Players
+            for (Player player :Bukkit.getOnlinePlayers()) {
+                if (!ManhuntGame.instance.getHunters().contains(player) && !ManhuntGame.instance.getSpeedrunners().contains(player)) {
+                    ItemStack itemStack = ItemStackUtils.playerHead(ChatColor.BLUE + player.getName(),
+                            player.getPlayerProfile(), List.of(
+                                    ChatColor.RESET + "Left Click to add this player to the speedrunners",
+                                    ChatColor.RESET + "Right Click to add this player to the hunters"));
+                    menuItems[i] = new MenuItem() {
+                        @Override
+                        public ItemStack getItem() {
+                            return itemStack;
+                        }
+
+                        @Override
+                        public void onClick(InventoryClickEvent event) {
+                            switch (event.getClick()) {
+                                case LEFT, SHIFT_LEFT -> {
+                                    ManhuntGame.instance.getSpeedrunners().add(player);
+                                    if (event.getWhoClicked() instanceof Player whoClicked) {
+                                        MenuManager.scheduleOpenMenu(whoClicked, Menu.PLAYERS_MENU);
+                                    }
+                                }
+                                case RIGHT, SHIFT_RIGHT -> {
+                                    ManhuntGame.instance.getHunters().add(player);
+                                    if (event.getWhoClicked() instanceof Player whoClicked) {
+                                        MenuManager.scheduleOpenMenu(whoClicked, Menu.PLAYERS_MENU);
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    i++;
+                }
+            }
             Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.GREEN + "Manhunt Plus");
             inventory.setStorageContents(MenuItem.getItems(menuItems));
             return inventory;
