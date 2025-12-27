@@ -1,6 +1,7 @@
 package fr.lanfix.manhuntplus;
 
 import fr.lanfix.manhuntplus.game.ManhuntEventListener;
+import fr.lanfix.manhuntplus.game.ManhuntGame;
 import fr.lanfix.manhuntplus.menu.MenuEventListener;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +30,9 @@ public final class ManhuntPlus extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        ManhuntGame.instance.stop();
     }
+
+    // TODO Editable config for default game settings
     
 }

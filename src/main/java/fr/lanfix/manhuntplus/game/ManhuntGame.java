@@ -1,5 +1,8 @@
 package fr.lanfix.manhuntplus.game;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,12 +22,25 @@ public class ManhuntGame {
     private List<Player> hunters = new ArrayList<>();
 
     public void start() {
+        World world;
+        if (runOnNewWorld) {
+            if (Bukkit.getWorld("Manhunt_World") != null) {
+
+            }
+        }
         running = true;
         // TODO Start Logic (Heal, Clear, Teleport...)
     }
 
     public void stop() {
         running = false;
+    }
+
+    public void checkHuntersWin() {
+        if (this.getSpeedrunners().isEmpty()) {
+            Bukkit.broadcastMessage("%s%sHunters have won, they killed all speedrunners !".formatted(ChatColor.BOLD, ChatColor.GREEN));
+            this.stop();
+        }
     }
 
     public boolean isRunning() {
