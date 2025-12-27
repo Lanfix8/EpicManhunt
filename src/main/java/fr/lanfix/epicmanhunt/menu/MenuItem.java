@@ -1,6 +1,6 @@
-package fr.lanfix.manhuntplus.menu;
+package fr.lanfix.epicmanhunt.menu;
 
-import fr.lanfix.manhuntplus.util.ItemStackUtils;
+import fr.lanfix.epicmanhunt.util.ItemStackUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

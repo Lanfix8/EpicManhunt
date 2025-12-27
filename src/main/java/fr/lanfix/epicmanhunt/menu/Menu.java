@@ -1,7 +1,7 @@
-package fr.lanfix.manhuntplus.menu;
+package fr.lanfix.epicmanhunt.menu;
 
-import fr.lanfix.manhuntplus.game.ManhuntGame;
-import fr.lanfix.manhuntplus.util.ItemStackUtils;
+import fr.lanfix.epicmanhunt.game.ManhuntGame;
+import fr.lanfix.epicmanhunt.util.ItemStackUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

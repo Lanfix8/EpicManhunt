@@ -1,4 +1,4 @@
-package fr.lanfix.manhuntplus.menu;
+package fr.lanfix.epicmanhunt.menu;
 
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;

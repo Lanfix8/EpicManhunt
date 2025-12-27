@@ -1,7 +1,7 @@
-package fr.lanfix.manhuntplus;
+package fr.lanfix.epicmanhunt;
 
-import fr.lanfix.manhuntplus.menu.Menu;
-import fr.lanfix.manhuntplus.menu.MenuManager;
+import fr.lanfix.epicmanhunt.menu.Menu;
+import fr.lanfix.epicmanhunt.menu.MenuManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

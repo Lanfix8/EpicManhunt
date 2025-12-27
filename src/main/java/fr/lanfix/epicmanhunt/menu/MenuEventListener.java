@@ -1,4 +1,4 @@
-package fr.lanfix.manhuntplus.menu;
+package fr.lanfix.epicmanhunt.menu;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

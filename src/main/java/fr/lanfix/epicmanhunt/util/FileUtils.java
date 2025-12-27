@@ -1,4 +1,4 @@
-package fr.lanfix.manhuntplus.util;
+package fr.lanfix.epicmanhunt.util;
 
 import java.io.File;
 import java.util.Objects;

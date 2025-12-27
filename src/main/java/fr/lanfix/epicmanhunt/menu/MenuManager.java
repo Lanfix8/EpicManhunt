@@ -1,6 +1,6 @@
-package fr.lanfix.manhuntplus.menu;
+package fr.lanfix.epicmanhunt.menu;
 
-import fr.lanfix.manhuntplus.ManhuntPlus;
+import fr.lanfix.epicmanhunt.EpicManhunt;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -18,7 +18,7 @@ public class MenuManager {
             public void run() {
                 openMenu(player, menu);
             }
-        }.runTask(ManhuntPlus.getInstance());
+        }.runTask(EpicManhunt.getInstance());
     }
 
     public static void openMenu(Player player, Menu menu) {
@@ -41,7 +41,7 @@ public class MenuManager {
             public void run() {
                 closeMenu(player);
             }
-        }.runTask(ManhuntPlus.getInstance());
+        }.runTask(EpicManhunt.getInstance());
     }
 
     public static void closeMenu(Player player) {

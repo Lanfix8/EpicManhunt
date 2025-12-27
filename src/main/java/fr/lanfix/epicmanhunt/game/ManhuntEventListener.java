@@ -1,6 +1,6 @@
-package fr.lanfix.manhuntplus.game;
+package fr.lanfix.epicmanhunt.game;
 
-import fr.lanfix.manhuntplus.ManhuntPlus;
+import fr.lanfix.epicmanhunt.EpicManhunt;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -84,7 +84,7 @@ public class ManhuntEventListener implements Listener {
                             cancel();
                         }
                     }
-                }.runTaskTimer(ManhuntPlus.getInstance(), 20, 20);
+                }.runTaskTimer(EpicManhunt.getInstance(), 20, 20);
             }
         }
     }

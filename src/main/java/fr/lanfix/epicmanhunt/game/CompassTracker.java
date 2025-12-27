@@ -1,6 +1,6 @@
-package fr.lanfix.manhuntplus.game;
+package fr.lanfix.epicmanhunt.game;
 
-import fr.lanfix.manhuntplus.util.ItemStackUtils;
+import fr.lanfix.epicmanhunt.util.ItemStackUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class CompassTracker implements Listener {
 

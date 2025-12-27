@@ -1,4 +1,4 @@
-package fr.lanfix.manhuntplus.util;
+package fr.lanfix.epicmanhunt.util;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

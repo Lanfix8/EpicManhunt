@@ -1,9 +1,8 @@
-package fr.lanfix.manhuntplus.game;
+package fr.lanfix.epicmanhunt.game;
 
-import fr.lanfix.manhuntplus.util.FileUtils;
+import fr.lanfix.epicmanhunt.util.FileUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;

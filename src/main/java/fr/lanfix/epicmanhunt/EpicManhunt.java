@@ -1,16 +1,16 @@
-package fr.lanfix.manhuntplus;
+package fr.lanfix.epicmanhunt;
 
-import fr.lanfix.manhuntplus.game.ManhuntEventListener;
-import fr.lanfix.manhuntplus.game.ManhuntGame;
-import fr.lanfix.manhuntplus.menu.MenuEventListener;
+import fr.lanfix.epicmanhunt.game.ManhuntEventListener;
+import fr.lanfix.epicmanhunt.game.ManhuntGame;
+import fr.lanfix.epicmanhunt.menu.MenuEventListener;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class ManhuntPlus extends JavaPlugin {
+public final class EpicManhunt extends JavaPlugin {
 
-    private static ManhuntPlus instance;
+    private static EpicManhunt instance;
 
-    public static ManhuntPlus getInstance() {
+    public static EpicManhunt getInstance() {
         return instance;
     }
 

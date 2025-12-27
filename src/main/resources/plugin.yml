@@ -1,12 +1,12 @@
-name: ManhuntPlus
+name: EpicManhunt
 version: '${project.version}'
-main: fr.lanfix.manhuntplus.ManhuntPlus
+main: fr.lanfix.epicmanhunt.EpicManhunt
 api-version: 1.16
-prefix: [ Manhunt Plus ]
+prefix: "[ Epic Manhunt ]"
 commands:
   manhunt:
-    permission: manhuntplus.admin
+    permission: epicmanhunt.admin
     aliases:
-      - manhuntplus
+      - epicmanhunt
     description: Admin command to run Manhunt Plus
     usage: /manhunt
