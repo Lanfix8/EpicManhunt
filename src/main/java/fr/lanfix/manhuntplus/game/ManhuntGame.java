@@ -57,9 +57,9 @@ public class ManhuntGame {
             hunter.sendExperienceChange(0, 0);
             hunter.setGameMode(GameMode.SURVIVAL);
             hunter.teleport(spawnLocation);
-            hunter.getInventory().clear();
             hunter.getActivePotionEffects().forEach(effect -> hunter.removePotionEffect(effect.getType()));
-            // TODO Give Compass
+            hunter.getInventory().clear();
+            hunter.getInventory().setItem(8, CompassTracker.getCompass());
         }
         running = true;
     }
@@ -76,6 +76,7 @@ public class ManhuntGame {
     }
 
     public boolean isRunning() {
+        checkHuntersWin();
         return running;
     }
 

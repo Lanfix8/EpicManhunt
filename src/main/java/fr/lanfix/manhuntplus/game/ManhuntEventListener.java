@@ -48,8 +48,8 @@ public class ManhuntEventListener implements Listener {
     public void onRespawn(PlayerRespawnEvent event) {
         if (ManhuntGame.instance.isRunning()) {
             Player player = event.getPlayer();
-            if (ManhuntGame.instance.getHunters().contains(player)) {
-                // TODO Give Compass
+            if (ManhuntGame.instance.getHunters().contains(player) && !ManhuntGame.instance.isKeepInventoryForHunters()) {
+                player.getInventory().addItem(CompassTracker.getCompass());
             }
         }
     }
