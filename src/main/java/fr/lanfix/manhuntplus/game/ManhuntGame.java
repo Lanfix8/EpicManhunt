@@ -1,9 +1,9 @@
 package fr.lanfix.manhuntplus.game;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.World;
+import fr.lanfix.manhuntplus.util.FileUtils;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,46 @@ public class ManhuntGame {
     private List<Player> hunters = new ArrayList<>();
 
     public void start() {
+        Bukkit.getLogger().info("Starting Manhunt");
         World world;
         if (runOnNewWorld) {
-            if (Bukkit.getWorld("Manhunt_World") != null) {
-
+            World oldWorld = Bukkit.getWorld("Manhunt_World");
+            if (oldWorld != null) {
+                FileUtils.deleteDirectory(oldWorld.getWorldFolder());
             }
+            world = Bukkit.createWorld(WorldCreator.name("Manhunt_World"));
+        } else {
+            world = Bukkit.getWorld("world");
+        }
+        assert world != null;
+        world.setTime(0);
+        Location spawnLocation = world.getSpawnLocation();
+        for (Player speedrunner : speedrunners) {
+            speedrunner.setHealth(20);
+            speedrunner.setSaturation(20);
+            speedrunner.setFoodLevel(20);
+            speedrunner.setTotalExperience(0);
+            speedrunner.setExp(0);
+            speedrunner.sendExperienceChange(0, 0);
+            speedrunner.setGameMode(GameMode.SURVIVAL);
+            speedrunner.teleport(spawnLocation);
+            speedrunner.getInventory().clear();
+            speedrunner.getActivePotionEffects().forEach(effect -> speedrunner.removePotionEffect(effect.getType()));
+        }
+        for (Player hunter : hunters) {
+            hunter.setHealth(20);
+            hunter.setSaturation(20);
+            hunter.setFoodLevel(20);
+            hunter.setTotalExperience(0);
+            hunter.setExp(0);
+            hunter.sendExperienceChange(0, 0);
+            hunter.setGameMode(GameMode.SURVIVAL);
+            hunter.teleport(spawnLocation);
+            hunter.getInventory().clear();
+            hunter.getActivePotionEffects().forEach(effect -> hunter.removePotionEffect(effect.getType()));
+            // TODO Give Compass
         }
         running = true;
-        // TODO Start Logic (Heal, Clear, Teleport...)
     }
 
     public void stop() {
