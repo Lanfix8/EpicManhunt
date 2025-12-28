@@ -3,6 +3,8 @@ package fr.lanfix.epicmanhunt.game;
 import fr.lanfix.epicmanhunt.util.FileUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,9 @@ public class ManhuntGame {
             speedrunner.teleport(spawnLocation);
             speedrunner.getInventory().clear();
             speedrunner.getActivePotionEffects().forEach(effect -> speedrunner.removePotionEffect(effect.getType()));
+            if (glowingSpeedrunner) {
+                speedrunner.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, -1, 0, false, false, false));
+            }
         }
         for (Player hunter : hunters) {
             hunter.setHealth(20);
