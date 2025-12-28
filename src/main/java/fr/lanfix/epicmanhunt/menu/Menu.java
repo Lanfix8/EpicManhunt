@@ -127,7 +127,7 @@ public enum Menu implements MenuInterface {
             }
             // Leave Menu
             // menuItems[26] = MenuItem.leaveMenu();
-            Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.GREEN + "Manhunt Plus");
+            Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.DARK_PURPLE + "Epic Manhunt");
             inventory.setStorageContents(MenuItem.getItems(menuItems));
             return inventory;
         }
@@ -257,7 +257,7 @@ public enum Menu implements MenuInterface {
                     i++;
                 }
             }
-            Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.GREEN + "Manhunt Plus");
+            Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.GREEN + "Change Player Roles");
             inventory.setStorageContents(MenuItem.getItems(menuItems));
             return inventory;
         }
