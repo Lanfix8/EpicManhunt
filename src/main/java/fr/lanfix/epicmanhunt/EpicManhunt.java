@@ -1,5 +1,6 @@
 package fr.lanfix.epicmanhunt;
 
+import fr.lanfix.epicmanhunt.game.CompassTracker;
 import fr.lanfix.epicmanhunt.game.ManhuntEventListener;
 import fr.lanfix.epicmanhunt.game.ManhuntGame;
 import fr.lanfix.epicmanhunt.menu.MenuEventListener;
@@ -25,6 +26,7 @@ public final class EpicManhunt extends JavaPlugin {
         // Event Listeners
         getServer().getPluginManager().registerEvents(new MenuEventListener(), this);
         getServer().getPluginManager().registerEvents(new ManhuntEventListener(), this);
+        getServer().getPluginManager().registerEvents(new CompassTracker(), this);
     }
 
     @Override

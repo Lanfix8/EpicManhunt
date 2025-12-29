@@ -8,6 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ManhuntGame {
 
@@ -19,8 +20,8 @@ public class ManhuntGame {
     private boolean runOnNewWorld = true;
     private boolean glowingSpeedrunner = false;
 
-    private List<Player> speedrunners = new ArrayList<>();
-    private List<Player> hunters = new ArrayList<>();
+    private final List<Player> speedrunners = new ArrayList<>();
+    private final List<Player> hunters = new ArrayList<>();
 
     public void start() {
         Bukkit.getLogger().info("Starting Manhunt");
@@ -28,6 +29,8 @@ public class ManhuntGame {
         if (runOnNewWorld) {
             World oldWorld = Bukkit.getWorld("Manhunt_World");
             if (oldWorld != null) {
+                oldWorld.getPlayers().forEach(player -> player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation()));
+                Bukkit.unloadWorld(oldWorld, false);
                 FileUtils.deleteDirectory(oldWorld.getWorldFolder());
             }
             world = Bukkit.createWorld(WorldCreator.name("Manhunt_World"));
@@ -73,7 +76,7 @@ public class ManhuntGame {
     }
 
     public void checkHuntersWin() {
-        if (this.getSpeedrunners().isEmpty()) {
+        if (this.running && this.getSpeedrunners().isEmpty()) {
             Bukkit.broadcastMessage("%s%sHunters have won, they killed all speedrunners !".formatted(ChatColor.BOLD, ChatColor.GREEN));
             this.stop();
         }

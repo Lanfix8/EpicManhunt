@@ -144,10 +144,11 @@ public enum Menu implements MenuInterface {
     },
 
     PLAYERS_MENU {
-        final MenuItem[] menuItems = MenuItem.fillBackground(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 54);
+        MenuItem[] menuItems = MenuItem.fillBackground(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 54);
 
         @Override
         public Inventory getInventory(InventoryHolder holder) {
+            menuItems = MenuItem.fillBackground(Material.LIGHT_GRAY_STAINED_GLASS_PANE, 54);
             // Speedrunners
             int i = 0;
             for (Player speedrunner : ManhuntGame.instance.getSpeedrunners()) {
@@ -224,7 +225,7 @@ public enum Menu implements MenuInterface {
                 i++;
             } while (i % 9 != 0);
             // Other Players
-            for (Player player :Bukkit.getOnlinePlayers()) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 if (!ManhuntGame.instance.getHunters().contains(player) && !ManhuntGame.instance.getSpeedrunners().contains(player)) {
                     ItemStack itemStack = ItemStackUtils.playerHead(ChatColor.BLUE + player.getName(),
                             player.getPlayerProfile(), List.of(

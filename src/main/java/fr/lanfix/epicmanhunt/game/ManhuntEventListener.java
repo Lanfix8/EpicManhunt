@@ -15,6 +15,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Objects;
+
 public class ManhuntEventListener implements Listener {
 
     @EventHandler
@@ -50,6 +52,7 @@ public class ManhuntEventListener implements Listener {
             Player player = event.getPlayer();
             if (ManhuntGame.instance.getHunters().contains(player) && !ManhuntGame.instance.isKeepInventoryForHunters()) {
                 player.getInventory().addItem(CompassTracker.getCompass());
+                event.setRespawnLocation(Objects.requireNonNull(Bukkit.getWorld("Manhunt_World")).getSpawnLocation());
             }
         }
     }
