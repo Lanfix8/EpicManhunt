@@ -1,6 +1,7 @@
 package fr.lanfix.epicmanhunt.game;
 
 import fr.lanfix.epicmanhunt.util.FileUtils;
+import fr.lanfix.epicmanhunt.util.PlayerUtils;
 import fr.lanfix.epicmanhunt.util.WorldUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -41,6 +42,7 @@ public class ManhuntGame {
         }
         assert world != null;
         WorldUtils.setGameRuleIfExists(world, locatorBarEnabled, "LOCATOR_BAR");
+
         world.setTime(0);
         Location spawnLocation = world.getSpawnLocation();
         for (Player speedrunner : speedrunners) {
@@ -53,6 +55,7 @@ public class ManhuntGame {
             speedrunner.setGameMode(GameMode.SURVIVAL);
             speedrunner.teleport(spawnLocation);
             speedrunner.getInventory().clear();
+            PlayerUtils.resetAdvancements(speedrunner);
             speedrunner.getActivePotionEffects().forEach(effect -> speedrunner.removePotionEffect(effect.getType()));
             if (glowingSpeedrunner) {
                 speedrunner.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, -1, 0, false, false, false));
@@ -68,6 +71,7 @@ public class ManhuntGame {
             hunter.setGameMode(GameMode.SURVIVAL);
             hunter.teleport(spawnLocation);
             hunter.getActivePotionEffects().forEach(effect -> hunter.removePotionEffect(effect.getType()));
+            PlayerUtils.resetAdvancements(hunter);
             hunter.getInventory().clear();
             hunter.getInventory().setItem(8, CompassTracker.getCompass());
         }
