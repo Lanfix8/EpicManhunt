@@ -286,6 +286,20 @@ public enum Menu implements MenuInterface {
                     i++;
                 }
             }
+            // Back to main menu button
+            menuItems[53] = new MenuItem() {
+                @Override
+                public ItemStack getItem() {
+                    return ItemStackUtils.itemStack(Material.ARROW, ChatColor.BLUE + "Back to Main Menu.");
+                }
+
+                @Override
+                public void onClick(InventoryClickEvent event) {
+                    if (event.getWhoClicked() instanceof Player player) {
+                        MenuManager.scheduleOpenMenu(player, Menu.MAIN_MENU);
+                    }
+                }
+            };
             Inventory inventory = Bukkit.createInventory(holder, menuItems.length, ChatColor.GREEN + "Change Player Roles");
             inventory.setStorageContents(MenuItem.getItems(menuItems));
             return inventory;
