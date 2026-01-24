@@ -4,6 +4,7 @@ import fr.lanfix.epicmanhunt.game.ManhuntGame;
 import fr.lanfix.epicmanhunt.util.ItemStackUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -87,6 +88,33 @@ public enum Menu implements MenuInterface {
                     itemStack.setItemMeta(itemMeta);
                 }
             };
+            // Locator Bar Button
+            try {
+                GameRule.class.getField("LOCATOR_BAR");
+                menuItems[13] = new MenuItem() {
+                    @Override
+                    public ItemStack getItem() {
+                        return ItemStackUtils.itemStack(Material.COMPASS, ChatColor.RESET + "Vanilla Locator Bar : " +
+                                (ManhuntGame.instance.isLocatorBarEnabled() ?
+                                        ChatColor.GREEN + "Enabled" : ChatColor.RED + "Disabled"));
+                    }
+
+                    @Override
+                    public void onClick(InventoryClickEvent event) {
+                        boolean isLocatorBarEnabled = !ManhuntGame.instance.isLocatorBarEnabled();
+                        ManhuntGame.instance.setLocatorBarEnabled(isLocatorBarEnabled);
+                        ItemStack itemStack = event.getCurrentItem();
+                        assert itemStack != null;
+                        ItemMeta itemMeta = itemStack.getItemMeta();
+                        assert itemMeta != null;
+                        itemMeta.setDisplayName(ChatColor.RESET + "Vanilla Locator Bar : " +
+                                (isLocatorBarEnabled ? ChatColor.GREEN + "Enabled" : ChatColor.RED + "Disabled"));
+                        itemStack.setItemMeta(itemMeta);
+                    }
+                };
+            } catch (NoSuchFieldException ignored) {
+                // GameRule does not exist so we skip this button
+            }
             // Players Button
             menuItems[16] = MenuItem.openMenu(Material.PLAYER_HEAD, ChatColor.BLUE + "Configure players", List.of(
                     ChatColor.RESET + "Choose the " + ChatColor.DARK_PURPLE + "speedrunners" + ChatColor.RESET +

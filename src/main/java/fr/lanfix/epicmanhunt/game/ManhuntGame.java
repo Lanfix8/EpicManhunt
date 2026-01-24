@@ -1,6 +1,7 @@
 package fr.lanfix.epicmanhunt.game;
 
 import fr.lanfix.epicmanhunt.util.FileUtils;
+import fr.lanfix.epicmanhunt.util.WorldUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -19,6 +20,7 @@ public class ManhuntGame {
     private boolean keepInventoryForHunters = false;
     private boolean runOnNewWorld = true;
     private boolean glowingSpeedrunner = false;
+    private boolean locatorBarEnabled = false;
 
     private final List<Player> speedrunners = new ArrayList<>();
     private final List<Player> hunters = new ArrayList<>();
@@ -38,6 +40,7 @@ public class ManhuntGame {
             world = Bukkit.getWorld("world");
         }
         assert world != null;
+        WorldUtils.setGameRuleIfExists(world, locatorBarEnabled, "LOCATOR_BAR");
         world.setTime(0);
         Location spawnLocation = world.getSpawnLocation();
         for (Player speedrunner : speedrunners) {
@@ -117,5 +120,13 @@ public class ManhuntGame {
 
     public List<Player> getHunters() {
         return hunters;
+    }
+
+    public boolean isLocatorBarEnabled() {
+        return locatorBarEnabled;
+    }
+
+    public void setLocatorBarEnabled(boolean locatorBarEnabled) {
+        this.locatorBarEnabled = locatorBarEnabled;
     }
 }
